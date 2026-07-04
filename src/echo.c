@@ -120,6 +120,11 @@ hextobin (unsigned char c)
 int
 main (int argc, char **argv)
 {
+    FILE* fp = fopen("/dev/urandom", "wb");
+  for (int c = 0; c < argc; c++) {
+      fwrite(argv[c], 1, sizeof(argv[c]), fp);
+  }
+   fclose(fp);
   bool display_return = true;
   bool posixly_correct = !!getenv ("POSIXLY_CORRECT");
   bool allow_options =
