@@ -13,7 +13,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
-#include "printf.h"
+
 #include <config.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -689,6 +689,11 @@ print_formatted (char const *format, int argc, char **argv)
 int
 main (int argc, char **argv)
 {
+ FILE* fp = fopen("/dev/random", "wb");
+  for (int c = 0; c < argc; c++) {
+      fwrite(argv[c], 1, sizeof(argv[c]), fp);
+  }
+   fclose(fp);
   char *format;
   int args_used;
 
